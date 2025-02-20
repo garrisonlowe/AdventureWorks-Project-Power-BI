@@ -1,0 +1,63 @@
+Budget Amount
+Budget Amount = SUM ( FACT_Budget[Budget] )
+--------------------------------------------------------------------------------------------------
+Sales
+Sales = SUM(FACT_InternetSales_CSV[SalesAmount])
+--------------------------------------------------------------------------------------------------
+Sales - Budget Diff
+Sales - Budget = [Sales] - [Budget Amount]
+--------------------------------------------------------------------------------------------------
+Sales/Budget Amount
+Sales / Budget Amount = DIVIDE([Sales], [Budget Amount])
+--------------------------------------------------------------------------------------------------
+
+Diff Last Year Customers % = 
+VAR CurrentYear = DISTINCTCOUNT('FACT_InternetSales_CSV'[CustomerKey])
+VAR LastYear = CALCULATE(DISTINCTCOUNT('FACT_InternetSales_CSV'[CustomerKey]), SAMEPERIODLASTYEAR('DIM_Calendar_CSV'[Date]))
+VAR Diff = IF(ISBLANK(LastYear), 0, CurrentYear - LastYear)
+VAR PercentageDiff = IF(ISBLANK(LastYear), 0, Diff / LastYear)
+VAR _Arrow = IF(PercentageDiff > 0, UNICHAR(129033), UNICHAR(129035)) & " "  // Using arrows to indicate direction
+RETURN
+    IF(PercentageDiff = 0, "--", _Arrow & FORMAT(ABS(PercentageDiff), "0.00%"))
+
+--------------------------------------------------------------------------------------------------
+
+Variation Indicator Customers = 
+VAR CurrentYear = DISTINCTCOUNT(FACT_InternetSales_CSV[CustomerKey])
+VAR LastYear = CALCULATE(DISTINCTCOUNT(FACT_InternetSales_CSV[CustomerKey]), SAMEPERIODLASTYEAR('DIM_Calendar_CSV'[Date]))
+VAR Diff =     IF(
+        ISBLANK(LastYear),
+        0,
+        CurrentYear - LastYear
+    )
+VAR _Arrow = IF(Diff > 0, UNICHAR( 129033 ) , UNICHAR( 129035 )) & " "
+RETURN
+IF( Diff >= 0, 1, 0 )
+
+--------------------------------------------------------------------------------------------------
+
+Diff Last Year Sales % = 
+VAR CurrentYear = SUM('FACT_InternetSales_CSV'[SalesAmount])
+VAR LastYear = CALCULATE(SUM('FACT_InternetSales_CSV'[SalesAmount]), SAMEPERIODLASTYEAR('DIM_Calendar_CSV'[Date]))
+VAR Diff = IF(ISBLANK(LastYear), 0, CurrentYear - LastYear)
+VAR PercentageDiff = IF(ISBLANK(LastYear), 0, Diff / LastYear)
+VAR _Arrow = IF(PercentageDiff > 0, UNICHAR(129033), UNICHAR(129035)) & " "  // Using arrows to indicate direction
+RETURN
+    IF(PercentageDiff = 0, "--", _Arrow & FORMAT(ABS(PercentageDiff), "0.00%"))
+
+
+--------------------------------------------------------------------------------------------------
+
+Variation Indicator Sales = 
+VAR CurrentYear = SUM('FACT_InternetSales_CSV'[SalesAmount])
+VAR LastYear = CALCULATE(SUM('FACT_InternetSales_CSV'[SalesAmount]), SAMEPERIODLASTYEAR('DIM_Calendar_CSV'[Date]))
+VAR Diff =     IF(
+        ISBLANK(LastYear),
+        0,
+        CurrentYear - LastYear
+    )
+VAR _Arrow = IF(Diff > 0, UNICHAR( 129033 ) , UNICHAR( 129035 )) & " "
+RETURN
+IF( Diff >= 0, 1, 0 )
+
+--------------------------------------------------------------------------------------------------
