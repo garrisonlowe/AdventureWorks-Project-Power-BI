@@ -140,19 +140,26 @@ Once we have our usable data, we can run the queries inside of PowerBI and creat
 ## Data Visualization
 
 First, let's create the data model.
+![Image](https://github.com/user-attachments/assets/b3d29c65-317a-420e-8ebd-941ea32515ee)
 
-![AdventureWorks Data Model](https://github.com/user-attachments/assets/96823bc6-3b20-4086-80a6-a6766c8cf8cf)
 
 ### Next, design the report.
 
 ### Sales Overview
-![Image](https://github.com/user-attachments/assets/19bc1897-933a-4f1e-8cb8-3361ad474e80)
+![Image](https://github.com/user-attachments/assets/f77a03ec-59a2-479a-affe-eecb7a5162cd)
 
 ### Customer Details
-![Image](https://github.com/user-attachments/assets/af5d57b4-ceac-46c6-9296-76e2962b1c3e)
+![Image](https://github.com/user-attachments/assets/8030ae54-bdff-4be4-95e3-d9a7b7de41d4)
 
 ### Product Details
-![Image](https://github.com/user-attachments/assets/5c1ea009-8ba4-4de9-bb80-afe46869b85f)
+![Image](https://github.com/user-attachments/assets/5ff355f5-5546-4cda-adfc-6416aac39b60)
+
+
+
+
+
+
+
 
 
 
